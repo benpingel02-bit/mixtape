@@ -1,0 +1,40 @@
+### Create User (direkt via H2-Konsole oder später via UserController)
+### Vorher manuell in H2: INSERT INTO USERS (USERNAME, EMAIL, PASSWORD_HASH) VALUES ('demo', 'demo@mix.tape', 'hash123')
+
+### Create Mixtape
+POST http://localhost:8080/api/mixtapes
+Content-Type: application/json
+
+{
+  "title": "Summer Vibes 94",
+  "description": "Hits vom Sommer",
+  "cassetteType": "C90",
+  "designTemplate": "retro",
+  "labelColor": "#FF6B35",
+  "isPublic": true,
+  "userId": 1
+}
+
+### Get all public
+GET http://localhost:8080/api/mixtapes
+
+### Get by ID
+GET http://localhost:8080/api/mixtapes/1
+
+### Update
+PUT http://localhost:8080/api/mixtapes/1
+Content-Type: application/json
+
+{
+  "title": "Summer Vibes 94 (Updated)",
+  "description": "Noch mehr Hits",
+  "cassetteType": "C90",
+  "isPublic": true,
+  "userId": 1
+}
+
+### Lock Mixtape
+PATCH http://localhost:8080/api/mixtapes/1/lock
+
+### Delete
+DELETE http://localhost:8080/api/mixtapes/1
