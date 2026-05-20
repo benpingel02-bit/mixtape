@@ -2,6 +2,7 @@ package com.mixtape.dto;
 
 import com.mixtape.model.CassetteType;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record MixtapeResponse(
         Long id,
@@ -17,5 +18,6 @@ public record MixtapeResponse(
         String username,
         int trackCount,
         int totalDurationSeconds,
-        int maxDurationSeconds
+        int maxDurationSeconds,
+        List<TrackResponse> tracks
 ) {}

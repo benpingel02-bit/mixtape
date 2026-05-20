@@ -1,5 +1,6 @@
 package com.mixtape.service;
 
+import com.mixtape.dto.TrackResponse;
 import com.mixtape.dto.MixtapeRequest;
 import com.mixtape.dto.MixtapeResponse;
 import com.mixtape.exception.BusinessRuleException;
@@ -109,6 +110,21 @@ public class MixtapeService {
         int totalDuration = m.getTracks().stream()
                 .mapToInt(t -> t.getDurationSeconds())
                 .sum();
+
+        List<TrackResponse> tracks = m.getTracks().stream()
+                .map(t -> new TrackResponse(
+                        t.getId(),
+                        t.getSpotifyTrackId(),
+                        t.getTitle(),
+                        t.getArtist(),
+                        t.getAlbumName(),
+                        t.getAlbumCoverUrl(),
+                        t.getDurationSeconds(),
+                        t.getPosition(),
+                        m.getId()
+                ))
+                .toList();
+
         return new MixtapeResponse(
                 m.getId(),
                 m.getTitle(),
@@ -123,7 +139,8 @@ public class MixtapeService {
                 m.getUser().getUsername(),
                 m.getTracks().size(),
                 totalDuration,
-                m.getCassetteType().getMaxDurationSeconds()
+                m.getCassetteType().getMaxDurationSeconds(),
+                tracks
         );
     }
 }
