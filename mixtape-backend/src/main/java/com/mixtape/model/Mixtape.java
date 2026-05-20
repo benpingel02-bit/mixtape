@@ -52,7 +52,7 @@ public class Mixtape {
     )
     private Set<Tag> tags = new HashSet<>();
 
-    protected Mixtape() {}
+    public Mixtape() {}
 
     @PrePersist
     protected void onCreate() {
