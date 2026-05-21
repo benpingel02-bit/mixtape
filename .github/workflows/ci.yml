@@ -21,6 +21,10 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: Make mvnw executable
+        working-directory: mixtape-backend
+        run: chmod +x mvnw
+
       - name: Build and test backend
         working-directory: mixtape-backend
         run: ./mvnw verify
