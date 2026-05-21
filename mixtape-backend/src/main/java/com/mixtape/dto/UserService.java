@@ -6,6 +6,10 @@ import com.mixtape.exception.BusinessRuleException;
 import com.mixtape.exception.ResourceNotFoundException;
 import com.mixtape.model.User;
 import com.mixtape.repository.UserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,12 +17,26 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+
+        return org.springframework.security.core.userdetails.User
+                .withUsername(user.getUsername())
+                .password(user.getPasswordHash())
+                .roles("USER")
+                .build();
     }
 
     @Transactional(readOnly = true)
@@ -48,8 +66,7 @@ public class UserService {
             throw new BusinessRuleException("Email already in use: " + request.email());
         }
 
-        // Passwort wird hier als Klartext gespeichert – wird mit JWT durch BCrypt ersetzt
-        User user = new User(request.username(), request.email(), request.password());
+        User user = new User(request.username(), request.email(), passwordEncoder.encode(request.password()));
         user.setBio(request.bio());
         user.setAvatarUrl(request.avatarUrl());
 
@@ -77,6 +94,10 @@ public class UserService {
             throw new ResourceNotFoundException("User not found: " + id);
         }
         userRepository.deleteById(id);
+    }
+
+    public String encodePassword(String rawPassword) {
+        return passwordEncoder.encode(rawPassword);
     }
 
     private UserResponse toResponse(User user) {
