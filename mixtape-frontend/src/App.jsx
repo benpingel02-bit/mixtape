@@ -5,20 +5,23 @@ import MixtapeListPage from "./pages/MixtapeListPage";
 import MixtapeDetailPage from "./pages/MixtapeDetailPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import MixtapeFormPage from './pages/MixtapeFormPage';
-
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="mixtapes" element={<MixtapeListPage />} />
-          <Route path="mixtapes/:id" element={<MixtapeDetailPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-          <Route path="mixtapes/new" element={<MixtapeFormPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="mixtapes" element={<MixtapeListPage />} />
+            <Route path="mixtapes/new" element={<MixtapeFormPage />} />
+            <Route path="mixtapes/:id" element={<MixtapeDetailPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
   );
 }
