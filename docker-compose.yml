@@ -1,0 +1,20 @@
+services:
+  backend:
+    build: ./mixtape-backend
+    container_name: mixtape-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:mixtapedb
+      - MIXTAPE_JWT_SECRET=dein-super-geheimer-schluessel-mindestens-32-zeichen-lang-abc123
+      - MIXTAPE_JWT_EXPIRATION=86400000
+      - SPOTIFY_CLIENT_ID=${SPOTIFY_CLIENT_ID}
+      - SPOTIFY_CLIENT_SECRET=${SPOTIFY_CLIENT_SECRET}
+
+  frontend:
+    build: ./mixtape-frontend
+    container_name: mixtape-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
