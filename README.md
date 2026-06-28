@@ -96,3 +96,11 @@ Swagger UI ist verfügbar unter: http://localhost:8080/swagger-ui.html
 - Ein Mixtape wird nach dem ersten Speichern gesperrt (`isLocked = true`)
 - Ein Mixtape braucht mindestens einen Track zum Abschließen
 - Usernames sind eindeutig
+
+## Spotify-Export
+
+Mixtapes können direkt in Spotify geöffnet werden:
+
+- Jeder Track verlinkt direkt zum Song auf Spotify (Web/App)
+- Alle Spotify-URIs eines Mixtapes lassen sich mit einem Klick kopieren und in eine eigene Playlist einfügen
+- Kein zusätzlicher Spotify-Login nötig – die Links basieren auf den bereits gespeicherten Track-IDs
