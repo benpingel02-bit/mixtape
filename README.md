@@ -104,3 +104,20 @@ Mixtapes können direkt in Spotify geöffnet werden:
 - Jeder Track verlinkt direkt zum Song auf Spotify (Web/App)
 - Alle Spotify-URIs eines Mixtapes lassen sich mit einem Klick kopieren und in eine eigene Playlist einfügen
 - Kein zusätzlicher Spotify-Login nötig – die Links basieren auf den bereits gespeicherten Track-IDs
+
+
+## Verwendete Hilfsmittel
+
+Bei der Entwicklung dieses Projekts wurde das KI-Tool Claude (Anthropic) als
+unterstützendes Hilfsmittel eingesetzt, unter anderem für:
+
+- Erklärung von Spring-Boot- und Spring-Security-Konzepten
+- Hilfe beim Debugging von Fehlermeldungen (z.B. Zirkelabhängigkeiten,
+  Spring-Security-Konfiguration, Spotify-API-Integration)
+- Vorschläge für Code-Struktur und Best Practices
+- Generierung von Dokumentation (README, technische Dokumentation)
+
+Die Konzeption, das Datenmodell, die Geschäftslogik und alle finalen
+Entscheidungen zur Architektur und Umsetzung stammen von mir. Der generierte
+Code wurde von mir überprüft, angepasst und verstanden, bevor er in das
+Projekt übernommen wurde.
